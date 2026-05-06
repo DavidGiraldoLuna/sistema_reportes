@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Reportes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary px-4">
+    <span class="navbar-brand fw-bold">Sistema de Reportes — Unimagdalena</span>
+    <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Cerrar sesión</a>
+</nav>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Mis Reportes</h5>
+        <a href="{% url 'crear_reporte' %}" class="btn btn-success btn-sm">+ Nuevo Reporte</a>
+    </div>
+
+    {% if reportes %}
+        <table class="table table-bordered table-hover">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Tipo de daño</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reporte in reportes %}
+                <tr>
+                    <td>{{ reporte.id }}</td>
+                    <td>{{ reporte.titulo }}</td>
+                    <td>{{ reporte.tipo_dano }}</td>
+                    <td><span class="badge bg-warning text-dark">{{ reporte.estado }}</span></td>
+                    <td>{{ reporte.fecha_creacion|date:"d/m/Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">No tienes reportes aún. <a href="{% url 'crear_reporte' %}">Crea uno aquí.</a></div>
+    {% endif %}
+
+    <a href="{% url 'dashboard_solicitante' %}" class="btn btn-secondary btn-sm">← Volver</a>
+</div>
+</body>
+</html>

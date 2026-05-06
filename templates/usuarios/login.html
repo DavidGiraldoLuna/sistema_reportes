@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infraestructura UniMag</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            padding: 40px 24px 60px;
+            text-align: center;
+            color: white;
+            border-radius: 0 0 0 0;
+        }
+        .app-icon {
+            background: rgba(255,255,255,0.2);
+            border-radius: 18px;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px;
+        }
+        .header-section h1 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .header-section p {
+            font-size: 13px;
+            opacity: 0.85;
+            margin: 0;
+        }
+        .form-section {
+            background: white;
+            margin: -24px 16px 0;
+            border-radius: 20px;
+            padding: 28px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        .input-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #374151;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+        .input-field {
+            display: flex;
+            align-items: center;
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px 14px;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .input-field input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #111827;
+            width: 100%;
+        }
+        .input-field i {
+            color: #9ca3af;
+            font-size: 16px;
+        }
+        .btn-ingresar {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+        .btn-ingresar:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        }
+        .register-link {
+            text-align: center;
+            font-size: 13px;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+        .register-link a {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .alert-custom {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+        .card-wrapper {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body>
+<div class="card-wrapper">
+    <div class="header-section">
+        <div class="app-icon">
+            <i class="bi bi-buildings" style="color: white; font-size: 30px;"></i>
+        </div>
+        <h1>Infraestructura UniMag</h1>
+        <p>Sistema de reportes de daños</p>
+    </div>
+    <div class="form-section">
+        <p class="subtitle">Ingresa con tus credenciales universitarias</p>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert-custom">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-label">USUARIO UNIVERSITARIO</div>
+            <div class="input-field">
+                <i class="bi bi-person"></i>
+                <input type="text" name="username" placeholder="usuario.apellido" required>
+            </div>
+            <div class="input-label">CONTRASEÑA</div>
+            <div class="input-field">
+                <i class="bi bi-lock"></i>
+                <input type="password" name="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-ingresar">
+                <i class="bi bi-box-arrow-in-right"></i> Ingresar
+            </button>
+        </form>
+
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
